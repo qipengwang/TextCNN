@@ -101,23 +101,11 @@ def train(train_iter, model, args):
         steps = 0
         for batch in train_iter:
             feature, target = batch.text, batch.label
-            # print(feature, target)
-            feature.data.t_()  # , target.data.sub_(1)
-            # print(target)
+            feature.data.t_()
             if args.cuda:
                 feature, target = feature.cuda(), target.cuda()
             optimizer.zero_grad()
-            # feature = torch.cat((feature, feature), 0)
-            # target = torch.cat((target, target), 0)
-            # print(feature.shape, target.shape)  # [128, 55左右], [128]二维feature第0维度和target一样就行
-            # break
-            logits = model(feature)  # [128, 3]
-            # print(target.max())
-            # print(logits.shape)
-            # break
-            # print(logits.sum(1))
-            # break
-            # print(logits.shape, target)
+            logits = model(feature)
             loss = F.cross_entropy(logits, target)
             epochLoss += loss.item()
             loss.backward()
