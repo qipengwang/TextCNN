@@ -18,7 +18,6 @@ def word_cut(text):
 
 def load_iter(text_field, label_field, args, **kwargs):
     print("load_iter...")
-    text_field.tokenize = word_cut
     train_dataset, test_dataset = data.TabularDataset.splits(
         path='data', format='tsv', skip_header=True,
         train='train.tsv', test='test.tsv',
@@ -47,7 +46,7 @@ def load_iter(text_field, label_field, args, **kwargs):
 def load(args):
     print('load_data...')
     # , unk_token=None, pad_token=None
-    text_field = data.Field(lower=True)
+    text_field = data.Field(lower=True, tokenize=word_cut)
     label_field = data.Field(sequential=False, unk_token=None, pad_token=None)
     train_iter, test_iter = load_iter(text_field, label_field, args, device=-1, repeat=False, shuffle=True)
     args.vocabulary_size = len(text_field.vocab)
