@@ -1,5 +1,9 @@
 # TextCNN
 
+使用pytorch + torchtext实现的TextCNN文本分类器
+
+
+
 ### requirements
 
 - python=3.6
@@ -18,7 +22,7 @@
 
 ### details
 
-- my blog link
+- torchtext.md：`torchtext`详解
 
 
 
